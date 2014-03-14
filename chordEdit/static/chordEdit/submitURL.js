@@ -1,29 +1,30 @@
 var player;
-
 function onYouTubeIframeAPIReady() {
-    $('#submit').click(function() {                    
-        document.getElementById("submit").innerHTML = "<i class='icon-refresh icon-spin'></i> Submit";        
-        $.ajax({
-            url: "/chordEdit/download",
-            type: 'GET',
-            data: {'YTurl': $('#YTurl').val()},
-
-            success: function(data) {
-                document.getElementById("submit").innerHTML = " Submit";      
-                console.log(data);
-                player = new YT.Player('player', {
-                    height: '300',
-                    width: '480',
-                    videoId: data,
-                    events: {
-                    'onReady': onPlayerReady,
-                    },
-                });
-            } 
-        
-        });
+    player = new YT.Player('player', {
+        height: '300',
+        width: '480',
+        events: {
+            'onReady': onPlayerReady,
+        },
     });
-}   
+}
+
+$('#submit').click(function() {                    
+    document.getElementById("submit").innerHTML = "<i class='icon-refresh icon-spin'></i> Submit";        
+    $.ajax({
+        url: "/chordEdit/download",
+        type: 'GET',
+        data: {'YTurl': $('#YTurl').val()},
+
+        success: function(data) {
+            document.getElementById("submit").innerHTML = " Submit";      
+            console.log(data);
+            player.loadVideoById(data);
+        } 
+        
+    });
+});
+   
 
 
 var clock = document.getElementById('clock'); 
