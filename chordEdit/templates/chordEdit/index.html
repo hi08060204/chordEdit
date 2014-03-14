@@ -1,0 +1,135 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Chord Editor</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'chordEdit/bootstrap-combined.no-icons.min.css' %}"> 
+      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
+      <link rel="stylesheet" href="{% static 'chordEdit/social-buttons.css' %}"> 
+      <link rel="stylesheet" href="{% static 'chordEdit/bootstrap-responsive.css' %}">
+      <link rel="stylesheet" href="{% static 'chordEdit/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic' %}" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" href="{% static 'chordEdit/css?family=Open+Sans:300italic,400italic,600italic,700italic,300,400,600,700,800' %}" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" href="{% static 'chordEdit/index.css' %}">
+
+    </head>
+
+
+      <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">          
+          <div class="navbar-inner">
+            <div class="container">
+              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+     
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="brand" href="#">hi08060204</a>
+              <div class="nav-collapse collapse">
+                <ul class="nav">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#about">About</a></li>
+                  <li><a href="contact">Contact</a><li>
+                </ul>
+              </div>
+            </div>  
+          </div>
+        </div>
+
+
+        <div class="container">
+          <div class="row-fluid heading">
+            <div class="span12">
+              <h1>Chord Editor</h1>
+            </div>
+          </div>
+          <div class="row-fluid subheading">
+            <div class="span12">
+              <p class="lead">Online guitar chord editor.</p>
+            </div>
+          </div>
+          <div class="row-fluid pitch">
+            <div class="span5 offset1 video">
+              <h3> Video playing </h3>
+            </div>
+          </div> 
+          <div class="row-fluid">
+             <div class="span5 offset1" id="showPlayer">
+	           <div id="player"></div>
+             </div>
+
+            <div class="span5 actions">
+              <div class="row-fluid">
+                <div class="span10 offset1">
+		          <h2 class="upload">Upload music here</h2>
+                </div> 
+                <div class="row-fluid">
+                    <div class="span8 offset1">
+                        <input id="YTurl" type="text" class="input-block-level" name="YTurl" placeholder="Select file and submit"> 
+                    </div>
+				    <div class="span3">    
+                        <a id="submit" class="btn btn-success"> Submit</a>
+		            </div>   
+                </div>
+              </div>  
+              <div class="row-fluid">
+                <div class="span10 offset1 social">
+                  <button class="btn btn-twitter"><i class="icon-twitter"></i> | Twitter</button>
+                  <button class="btn btn-linkedin"><i class="icon-linkedin"></i> | LinkedIn</button>
+                  <button class="btn btn-google-plus"><i class="icon-google-plus"></i> | Google+</button>
+                </div>
+              </div>
+          </div>
+        </div>  
+        <div class="row-fluid tab">
+                <div class="span10 offset1">     
+                        <h3>Tapping chord down here</h3>
+			<div id="clock"></div>
+                        <img class="img-polaroid" src="http://placehold.it/1000x1000">
+		</div>
+	</div>
+        <div class="row-fluid faq">
+                <div class="span10 offset1">
+                        <h3>FAQ</h3>
+                        <div class="accordion" id="accordion2">
+                                <div class="accordion-group">
+                                        <div class="accordion-heading">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">What does FAQ stand for?</a>
+                                        </div>
+                                        <div id="collapseOne" class="accordion-body collapse">
+                                                <div class="accordion-inner">
+                                                        Frequently Asked Question.
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="accordion-group">
+                                        <div class="accordion-heading">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">What's a Frequently Asked Question?</a>
+                                        </div>
+                                        <div id="collapseTwo" class="accordion-body collapse">
+                                                <div class="accordion-inner">
+                                                        A question which is commonly asked by users.
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>        
+                </div>       
+        </div>
+        
+        <div class="row-fluid footer">
+                <div class="span12">
+                        <p>This work os licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0">CC By-SA 3.0</a>, without all the cruft that would otherwise be put at the bottom of the page.</p> 
+                </div>
+        </div>
+</div>
+
+    <script src="{% static 'chordEdit/jquery.js' %}"></script>
+    <script src="{% static 'chordEdit/bootstrap.js' %}"></script>
+    <script src="{% static 'chordEdit/iframe_api.js' %}"></script>
+    <script src="{% static 'chordEdit/getVideoTime.js' %}"></script>
+    <script src="{% static 'chordEdit/submitURL.js' %}"></script>
+</body>
+</html>          
