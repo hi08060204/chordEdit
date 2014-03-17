@@ -47,11 +47,11 @@ padding: 2% 0%;
 }
 .actions {
     background-color: #343434;
-    padding: 0% 0%;
+padding: 0% 0%;
 }
-.tab {
-padding: 2.5% 0%;
-         text-align: center;      
+.tab-title  {
+    padding: 2.5% 0%;
+    text-align: center;      
 }
 
 .video, .thermometer, .order, .social, .statistics, .upload {
@@ -83,29 +83,29 @@ padding: 2.5% 0%;
 color: #ccccff;
 }
 
-.form-signin {
-    max-width: 300px;
-padding: 19px 29px 29px;
-margin: 0 auto 20px;
-        background-color: #fff;
-border: 1px solid #e5e5e5;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-        -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-        box-shadow: 0 1px 2px rgba(0,0,0,.05);
+
+.tab {
+    background-color: #eee;
+    border-radius: 3px;
 }
-.form-signin .form-signin-heading,
-    .form-signin .checkbox {
-        margin-bottom: 10px;
-color: white;
-    }
-.form-signin input[type="text"],
-    .form-signin input[type="password"] {
-        font-size: 16px;
-height: auto;
-        margin-bottom: 15px;
-padding: 7px 9px;
-    }
+
+.grid-show {
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.grid-show [class*="span"] {
+    background-color: #eee;
+    text-align: center;
+    border-radius: 3px;
+    min-height: 40px;
+    line-height: 40px;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.grid-show [class*="span"][class*="span"] [class*="span"] {
+    background-color: #ddd;    
+}
+
 
