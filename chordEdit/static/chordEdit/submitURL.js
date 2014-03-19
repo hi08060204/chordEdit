@@ -19,10 +19,10 @@ $('#submit').click(function() {
         success: function(data) {
             document.getElementById("submit").innerHTML = " Submit";      
             console.log(data);
+            $('#tab').slideUp("slow");
             player.loadVideoById(data);
             document.getElementById("tab").innerHTML = DrawingTab(8,4,4);
-            $('#tab').hide(500);
-            $("#tab").show("slow");
+            $("#tab").slideDown("slow");
         } 
         
     });
@@ -55,7 +55,7 @@ function DrawingTab(numRows, beatsPerMeasure, measuresPerRow) {
         
             context = context + "</div></div>";
         }
-        context = context + "</div>"
+    context = context + "</div>"
     }   
     return context;
 }
