@@ -28,12 +28,14 @@ function onYouTubeIframeAPIReady() {
 
                 // drawing tab
                 $("#tab").html(DrawingTab(numBeats/16+1,4,4));
-                $('.beat-button').click(function() {
-                    var button = $(this).attr('id');
-                    alert(button);    
-                });
+
                 $('#tab').slideUp("slow", function() {
                     $("#tab").slideDown("slow");       
+                });
+
+                $('.beat-button').click(function() {
+                    var b = $(this).attr('id');
+                    player.seekTo(beatsList[parseInt(b)], true);             
                 });
                 player.loadVideoById(videoId);
             } 
@@ -62,12 +64,12 @@ function onPlayerReady(event) {
             } 
         }
 
-        $('#clock').html("sec : " + seconds + "   beat ID : " + beatId);
+   //     $('#clock').html("sec : " + seconds + "   beat ID : " + beatId);
         if (startBeating){
-            $('#grid' + previousBeat.toString()).css("background-color", "#ddd");
-            $('#grid'+ beatId.toString()).css("background-color","#bbb");
+            $('#' + previousBeat.toString()).css("background-color", "#ddd");
+            $('#'+ beatId.toString()).css("background-color","#bbb");
         }
-    }, 10); 
+    }, 1); 
 }
 
 
@@ -80,7 +82,7 @@ function DrawingTab(numRows, beatsPerMeasure, measuresPerRow) {
             context = context + "<div class='span3'><div class='row-fluid grid-show'>";
             for (var k=0;k < beatsPerMeasure; k++){
                 gridId = i*measuresPerRow*beatsPerMeasure + j*beatsPerMeasure + k + 1;
-                context = context + "<div class='span3 beat-button' id='grid" + gridId.toString() + "'>" + gridId.toString() + "</div>";
+                context = context + "<div class='span3 beat-button' id='" + gridId.toString() + "'>" + gridId.toString() + "</div>";
             }
             context = context + "</div></div>";
         }
