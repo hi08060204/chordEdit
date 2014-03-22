@@ -14,19 +14,14 @@ def download(request):
 
     url = request.GET['YTurl'] 
     
-    videoId = os.popen('youtube-dl --get-id {}'.format(url)).read() 
+    videoId = os.popen('youtube-dl --get-id {}'.format(url)).read().strip() 
     if len(videoId) == 0: 
         return HttpResponse('Download error') 
 
-    report = os.system("youtube-dl -x -o '{}%(id)s.m4a' {}".format(savePath,url))
-    
-    f = open('/tmp/test.onsets.txt')
-    onset = []
-    for line in f:
-        line = line.strip()
-        onset.append(line) 
-    
-    f.close()
+    os.system("youtube-dl -x --audio-format 'wav' -o '{}%(id)s.m4a' {}".format(savePath,url))
+    onset = os.popen("aubiotrack -i {}{}.wav".format(savePath, videoId)).read().splitlines()
+
+
     dic = {'id': videoId, 'beats': onset} 
     response = json.dumps(dic)
     
