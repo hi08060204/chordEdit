@@ -1,4 +1,8 @@
 var player;
+var beatsList;  
+var videoId;
+var numBeats;
+
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         height: '300',
@@ -7,52 +11,73 @@ function onYouTubeIframeAPIReady() {
             'onReady': onPlayerReady,
         },
     });
-}
 
-$('#submit').click(function() {                    
-    document.getElementById("submit").innerHTML = "<i class='icon-refresh icon-spin'></i> Submit";        
-    $.ajax({
-        url: "/chordEdit/download",
-        type: 'GET',
-        data: {'YTurl': $('#YTurl').val()},
+    $('#submit').click(function() {                    
+        $("#submit").html("<i class='icon-refresh icon-spin'></i> Submit");
+        $.ajax({
+            url: "/chordEdit/download",
+            type: 'GET',
+            data: {'YTurl': $('#YTurl').val()},
+            dataType: 'json',
+            success: function(data) {
+                $("#submit").html(" Submit");      
 
-        success: function(data) {
-            document.getElementById("submit").innerHTML = " Submit";      
-            console.log(data);
-            $('#tab').slideUp("slow");
-            player.loadVideoById(data);
-            document.getElementById("tab").innerHTML = DrawingTab(8,4,4);
-            $("#tab").slideDown("slow");
-        } 
+                videoId = data['id'];
+                numBeats = data['beats'].length;
+                beatsList = data['beats'];
+
+                // drawing tab
+                $("#tab").html(DrawingTab(numBeats/16+1,4,4));
+                $('#tab').slideUp("slow", function() {
+                    $("#tab").slideDown("slow");       
+                });
+                player.loadVideoById(videoId);
+            } 
         
+        });
     });
-});
+}
    
 
 
-var clock = document.getElementById('clock'); 
+var previousBeat = -1;
+var beatId = 0;
 function onPlayerReady(event) {
-	console.log(clock);
-        setInterval(function() {
-                var seconds = Math.floor(player.getCurrentTime());
-                var mm = Math.floor(seconds / 60);
-                var ss = Math.floor(seconds % 60);
-                mm = (mm < 10) ? ('0' + String(mm)) : String(mm);
-                ss = (ss < 10) ? ('0' + String(ss)) : String(ss);
-                clock.innerHTML = mm + ':' + ss;
-        }, 100); 
+
+    setInterval(function() {
+        var seconds = player.getCurrentTime();
+        // matching time to beat
+
+        previousBeat = beatId;
+        var startBeating = false;
+        for (var i=0;i<numBeats-1;i++){
+            if (seconds >= beatsList[i] && seconds < beatsList[i+1]) { 
+                beatId = i;
+                startBeating = true;
+                break;
+            } 
+        }
+
+        //$('#clock').html("sec : " + seconds + "   beat ID : " + beatId);
+        if (startBeating){
+            $('#grid' + previousBeat.toString()).css("background-color", "#ddd");
+            $('#grid'+ beatId.toString()).css("background-color","#bbb");
+        }
+    }, 1); 
 }
 
 
 function DrawingTab(numRows, beatsPerMeasure, measuresPerRow) { 
     var context = ""; 
+    var gridId;
     for (var i=0;i < numRows;i++){
         context  = context + "<div class='row-fluid grid-show'>";
         for (var j=0;j < measuresPerRow; j++ ){
             context = context + "<div class='span3'><div class='row-fluid grid-show'>";
-            for (var k=1;k <= beatsPerMeasure; k++)
-                context = context + "<div class='span3'>" + k.toString() + "</div>";
-        
+            for (var k=0;k < beatsPerMeasure; k++){
+                gridId = i*measuresPerRow*beatsPerMeasure + j*beatsPerMeasure + k + 1;
+                context = context + "<div class='span3' id='grid" + gridId.toString() + "'>" + gridId.toString() + "</div>";
+            }
             context = context + "</div></div>";
         }
     context = context + "</div>"
