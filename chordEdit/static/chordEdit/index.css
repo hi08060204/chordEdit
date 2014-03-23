@@ -47,7 +47,7 @@ padding: 2% 0%;
 }
 .actions {
     background-color: #343434;
-padding: 0% 0%;
+    padding: 0% 0%;
 }
 .tab-title  {
     padding: 2.5% 0%;
@@ -95,7 +95,6 @@ color: #ccccff;
 }
 
 .grid-show [class*="span"] {
-    background-color: #eee;
     text-align: center;
     border-radius: 3px;
     min-height: 40px;
